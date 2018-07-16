@@ -14,7 +14,7 @@
 class Character < ApplicationRecord
   belongs_to :campaign, optional: true
   belongs_to :user, foreign_key: :player_id
-  has_many :items
+  has_one :inventory, as: :owner
   has_many :journals, through: :entries
 
   validates :player_id, presence: true

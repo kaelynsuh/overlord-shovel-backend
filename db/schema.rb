@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_16_191504) do
+ActiveRecord::Schema.define(version: 2018_07_15_194256) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,6 +41,23 @@ ActiveRecord::Schema.define(version: 2018_06_16_191504) do
     t.integer "experience"
     t.index ["character_id"], name: "index_entries_on_character_id"
     t.index ["journal_id"], name: "index_entries_on_journal_id"
+  end
+
+  create_table "inventories", force: :cascade do |t|
+    t.string "name"
+    t.string "owner_type"
+    t.bigint "owner_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["owner_type", "owner_id"], name: "index_inventories_on_owner_type_and_owner_id"
+  end
+
+  create_table "item_slots", force: :cascade do |t|
+    t.integer "item_id"
+    t.string "inventory_id"
+    t.integer "quantity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "items", force: :cascade do |t|
